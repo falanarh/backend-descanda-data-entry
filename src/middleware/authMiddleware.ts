@@ -7,7 +7,14 @@ if (!JWT_SECRET) {
   throw new Error('JWT_SECRET environment variable is not defined');
 }
 
+// Define interface for decoded token payload
+interface TokenPayload {
+  id: string;
+  email: string;
+}
+
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  // Get token from Authorization header
   const token = req.header('Authorization')?.split(' ')[1];
 
   if (!token) {
@@ -18,8 +25,13 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    (req as any).admin = decoded;
+    // Verify the token
+    const decoded = jwt.verify(token, JWT_SECRET) as TokenPayload;
+
+    // Attach decoded information to request
+    (req as any).user = decoded;
+
+    // Call the next middleware or route handler
     next();
   } catch (err) {
     res.status(400).json({
