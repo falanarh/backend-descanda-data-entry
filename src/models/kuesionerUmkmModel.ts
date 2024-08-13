@@ -21,6 +21,7 @@ interface IKuesionerUmkm extends Document {
   lokasi_tempat_usaha: string;
   skala_usaha: string;
   email_pcl: string; // Added email property
+  catatan: string;
 }
 
 const KuesionerUmkmSchema: Schema = new Schema({
@@ -48,6 +49,7 @@ const KuesionerUmkmSchema: Schema = new Schema({
   lokasi_tempat_usaha: { type: String, required: true },
   skala_usaha: { type: String, required: true },
   email_pcl: { type: String, required: true }, // Added email property
+  catatan: { type: String },
 });
 
 KuesionerUmkmSchema.index({ rt_rw_dusun: 1, no_urut_bangunan: 1 });
