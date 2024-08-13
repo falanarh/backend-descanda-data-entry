@@ -35,7 +35,24 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
+const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await userService.getAllUsers();
+    res.status(200).json({
+      statusCode: 200,
+      message: 'Users retrieved successfully',
+      data: users,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      statusCode: 500,
+      message: error.message,
+    });
+  }
+};
+
 export default {
   register,
   login,
+  getAllUsers,
 };

@@ -34,7 +34,13 @@ const authenticateUser = async (email: string, password: string) => {
   return token;
 };
 
+const getAllUsers = async () => {
+  const users = await User.find().select('-password'); // Exclude password field
+  return users;
+};
+
 export default {
   registerUser,
   authenticateUser,
+  getAllUsers,
 };
