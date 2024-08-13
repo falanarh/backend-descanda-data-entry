@@ -35,6 +35,10 @@ const getListingUmkms = async () => {
   return ListingUmkm.find().sort({ kode: 1 });
 };
 
+const getUmkmListings = async () => {
+    return ListingUmkm.find({ is_umkm: "ya" }).sort({ kode: 1 });
+  };
+
 const getListingUmkmById = async (id: string) => {
   const listing = await ListingUmkm.findById(id);
   if (!listing) {
@@ -92,4 +96,5 @@ export default {
   getListingUmkmById,
   updateListingUmkm,
   deleteListingUmkm,
+  getUmkmListings,
 };

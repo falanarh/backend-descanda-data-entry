@@ -35,6 +35,22 @@ const getAll = async (req: Request, res: Response) => {
   }
 };
 
+const getUmkmListings = async (req: Request, res: Response) => {
+    try {
+      const listings = await listingUmkmService.getUmkmListings();
+      res.status(200).json({
+        statusCode: 200,
+        message: 'Daftar listing UMKM yang valid berhasil ditampilkan.',
+        data: listings,
+      });
+    } catch (error: any) {
+      res.status(500).json({
+        statusCode: 500,
+        message: error.message,
+      });
+    }
+  };
+
 const getById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -91,6 +107,7 @@ const remove = async (req: Request, res: Response) => {
 export default {
   create,
   getAll,
+  getUmkmListings,
   getById,
   update,
   remove,
